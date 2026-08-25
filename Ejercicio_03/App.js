@@ -1,0 +1,52 @@
+import React from "react";
+import { useState } from "react";
+import { View, StyleSheet, Button, SafeAreaView } from 'react-native';
+import CustomModal from "./componentes/CustomModal";
+import DemoFlatList from "./componentes/DemoFlatList";
+import DemoSectionList from "./componentes/DemoSectionList";
+
+export default function App() {
+    const [modalVisible, setModalVisible] = useState(false);
+    
+    const objetoContenido = {
+        valor: (
+            <View style={styles.listsContainer}>
+                <DemoFlatList />
+                <DemoSectionList />
+            </View>
+        ),
+    };
+
+    return (
+        <SafeAreaView style={styles.container}>
+            <View style={styles.content}>
+                <Button
+                    title="Ver mensaje"
+                    onPress={() => setModalVisible(true)}
+                />
+                <CustomModal
+                    visible={modalVisible}
+                    onClose={() => setModalVisible(false)}
+                    contenido={objetoContenido}
+                />
+            </View>
+        </SafeAreaView>
+    );
+}
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: "#ddc725"
+    },
+    content: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center"
+    },
+    listsContainer: {
+        height: 350, 
+        width: 250,
+        marginTop: 10,
+    }
+});
